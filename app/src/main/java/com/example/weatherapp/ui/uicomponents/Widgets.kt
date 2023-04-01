@@ -27,56 +27,14 @@ import com.example.weatherapp.R
 
 @Composable
 fun WeatherStateImage(imageUrl: String) {
+    /*
+        Here, we make use of coil. An image loading library for Android backed by Kotlin Coroutines. Coil is fast,
+        It performs a number of optimizations including memory and disk caching, downsampling the
+        image in memory, automatically pausing/cancelling requests, and more.
+     */
     Image(painter = rememberImagePainter(imageUrl),
         contentDescription = "icon image",
         modifier = Modifier.size(180.dp))
-}
-
-@Composable
-fun WeatherDetailRow(weather: Weather) {
-    val imageUrl = "https://openweathermap.org/img/wn/${weather.weather[0].icon}.png"
-    Surface(
-        Modifier
-            .padding(3.dp)
-            .fillMaxWidth(),
-        shape = CircleShape.copy(topEnd = CornerSize(6.dp)),
-        color = Color.White) {
-        Row(modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween) {
-            Text(
-                formatDate(weather.dt)
-                    .split(",")[0],
-                modifier = Modifier.padding(start = 5.dp)
-            )
-            WeatherStateImage(imageUrl = imageUrl)
-            Surface(modifier = Modifier.padding(0.dp),
-                shape = CircleShape,
-                color = Color(0xFFFFC400)
-            ) {
-                Text(weather.weather[0].description,
-                    modifier = Modifier.padding(4.dp),
-                    style = MaterialTheme.typography.caption)
-
-            }
-            Text(text = buildAnnotatedString {
-                withStyle(style = SpanStyle(
-                    color = Color.Blue.copy(alpha = 0.7f),
-                    fontWeight = FontWeight.SemiBold
-                )
-                ){
-                    append(formatDecimals(weather.main.tempMax) + "º")
-
-                }
-                withStyle(
-                    style = SpanStyle(
-                        color = Color.LightGray)
-                ){
-                    append(formatDecimals(weather.main.tempMin) + "º")
-                }
-            })
-        }
-    }
 }
 
 @Composable
@@ -102,13 +60,8 @@ fun SunsetSunRiseRow(weather: Weather) {
             Image(painter = painterResource(id = R.drawable.sunset),
                 contentDescription = "sunset",
                 modifier = Modifier.size(50.dp))
-
-
         }
-
     }
-
-
 }
 
 @Composable
@@ -146,8 +99,6 @@ fun HumidityWindPressureRow(weather: Weather,
                 style = MaterialTheme.typography.caption)
 
         }
-
     }
-
 }
 

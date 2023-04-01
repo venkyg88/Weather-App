@@ -21,6 +21,7 @@ import com.example.weatherapp.ui.screens.main.MainViewModel
 import com.example.weatherapp.ui.uicomponents.HumidityWindPressureRow
 import com.example.weatherapp.ui.uicomponents.SunsetSunRiseRow
 import com.example.weatherapp.ui.uicomponents.WeatherStateImage
+import com.example.weatherapp.utils.IMAGE_BASE_URL
 import com.example.weatherapp.utils.formatDate
 import com.example.weatherapp.utils.formatDecimals
 import com.example.weatherapp.widgets.WeatherAppBar
@@ -30,16 +31,26 @@ fun WeatherMainScreen(
     navController: NavHostController,
     mainViewModel: MainViewModel = hiltViewModel(),
     locationCoordinates: LocationCoordinates?,
-    city: String?
+    city: String?,
 ) {
 
+    /*
+    Here are we are using one of the side-effects in Compose called produceState, which gives a coroutine scope.
+    The main use of it is it converts non-compose state to compose state
+     */
     val weatherData = produceState<DataOrException<Weather, Boolean, Exception>>(
         initialValue = DataOrException(loading = true)) {
-
+        // When the coordinates are known and the passed city is empty, we make a network call with latitude and longitude to fetch weather
+        // When the coordinates are not know and city is empty, we make a network call using a default city cary
+        // When the coordinates are not know and the city is passed via search we make a network call using the city search
         value = if (city?.trim().isNullOrEmpty() && locationCoordinates != null) {
-            val (latitude, longitude) = locationCoordinates!!
+            val (latitude, longitude) = locationCoordinates
             mainViewModel.getWeatherByCoordinates(latitude, longitude)
-        } else mainViewModel.getWeatherByCity(city = city)
+        } else if (city?.trim().isNullOrEmpty()) {
+            mainViewModel.getWeatherByCity("Cary")
+        } else {
+            mainViewModel.getWeatherByCity(city = city)
+        }
     }.value
 
     if (weatherData.loading == true) {
@@ -51,6 +62,9 @@ fun WeatherMainScreen(
     }
 }
 
+/*
+    Error handling when the GPS is not made available or invalid search value is entered
+ */
 @Composable
 fun ErrorMessage() {
     Column(
@@ -67,6 +81,12 @@ fun ErrorMessage() {
 
 }
 
+/*
+    On successful weather data retrieval we show the AppBar with current location and option to search
+    and the screen contains the view of weather data like the time, image, temperature, sunset, sunrise time,
+    wind, pressure, etc,.
+
+ */
 @Composable
 fun MainScaffold(weather: Weather, navController: NavHostController) {
 
@@ -88,21 +108,24 @@ fun MainScaffold(weather: Weather, navController: NavHostController) {
 @Composable
 fun MainContent(data: Weather) {
     val weatherIcon = data.weather[0].icon
-    val imageUrl = "https://openweathermap.org/img/wn/${weatherIcon}@2x.png"
+    // To get the image, we make use of the image url passing the icon code we received from weather object
+    val imageUrl = IMAGE_BASE_URL + "${weatherIcon}@2x.png"
 
     Column(
         Modifier
             .padding(4.dp)
             .fillMaxWidth(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Date formatted from Unix time stamp, ex: Sat, Apr 1
         Text(text = formatDate(data.dt),
             style = MaterialTheme.typography.caption,
             color = MaterialTheme.colors.onSecondary,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.padding(10.dp))
 
+        // compose elements that make use of re-usable ui components to produce the Mainscreen ui
         Surface(modifier = Modifier
             .padding(4.dp)
             .size(300.dp),

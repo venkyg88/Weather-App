@@ -73,11 +73,11 @@ class LocationLiveData(var context: Context): LiveData<LocationCoordinates>() {
     }
 
     companion object {
-        val ONE_MINUTE : Long = 60000
-        val locationRequest : LocationRequest = LocationRequest.create().apply {
-            interval = ONE_MINUTE
-            fastestInterval = ONE_MINUTE/4
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        val ONE_DAY: Long = 1440000
+        val locationRequest: LocationRequest = LocationRequest.create().apply {
+            interval = ONE_DAY
+            fastestInterval = ONE_DAY / 2
+            priority = LocationRequest.PRIORITY_LOW_POWER
 
         }
     }
