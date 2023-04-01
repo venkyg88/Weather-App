@@ -12,7 +12,7 @@ import kotlin.Exception
 class MainViewModel @Inject constructor(private val repository: WeatherRepository) :
     ViewModel() {
 
-    suspend fun getWeatherByCity(city: String): DataOrException<Weather, Boolean, Exception> {
+    suspend fun getWeatherByCity(city: String?): DataOrException<Weather, Boolean, Exception> {
         return repository.getWeather(city = city)
     }
 
