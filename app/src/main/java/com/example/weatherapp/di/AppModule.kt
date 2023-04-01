@@ -1,6 +1,8 @@
 package com.example.weatherapp.di
 
 import com.example.weatherapp.network.WeatherApi
+import com.example.weatherapp.repository.IWeatherRepository
+import com.example.weatherapp.repository.WeatherRepository
 import com.example.weatherapp.utils.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -23,4 +25,10 @@ class AppModule {
             .build()
             .create(WeatherApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideWeatherRepository(weatherApi: WeatherApi) =
+        WeatherRepository(weatherApi) as IWeatherRepository
+
 }
