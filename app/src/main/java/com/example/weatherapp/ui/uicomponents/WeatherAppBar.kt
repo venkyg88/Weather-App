@@ -18,7 +18,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
-
+/*
+    Re-usable AppBar component across the app
+ */
 @Composable
 fun WeatherAppBar(
     title: String = "Title",

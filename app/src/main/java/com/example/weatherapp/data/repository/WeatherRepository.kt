@@ -8,31 +8,32 @@ import javax.inject.Inject
 
 class WeatherRepository @Inject constructor(private val api: WeatherApi) : IWeatherRepository {
 
+    /*
+        Suspendable functions which pass city and return weather data on success and exception on failure
+     */
     override suspend fun getWeather(city: String?): DataOrException<Weather, Boolean, Exception> {
         val response = try {
             api.getWeatherByCity(city = city)
 
         } catch (e: Exception) {
-            Log.d("REX", "getWeather: $e")
             return DataOrException(e = e)
         }
-        Log.d("INSIDE", "getWeather: $response")
         return DataOrException(data = response)
     }
 
+    /*
+        Suspendable functions which pass location and return weather data on success and exception on failure
+     */
     override suspend fun getWeatherByCoordinates(
         latitude: String,
         longitude: String,
     ): DataOrException<Weather, Boolean, Exception> {
 
-        Log.d("coordinates", "${latitude} +, ${longitude}")
         val response = try {
             api.getWeatherByCoordinates(latitude = latitude, longitude = longitude)
         } catch (e: Exception) {
-            Log.d("Repo response by coordinates", "getWeather: $e")
             return DataOrException(e = e)
         }
-        Log.d("INSIDE", "getWeather: $response")
         return DataOrException(data = response)
     }
 

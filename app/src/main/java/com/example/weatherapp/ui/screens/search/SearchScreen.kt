@@ -69,7 +69,7 @@ fun SearchBar(
     modifier: Modifier = Modifier,
     onSearch: (String) -> Unit = {},
 ) {
-    // Used to retain the data entered in the search bar for configurtional changes
+    // Used to retain the data entered in the search bar for configurational changes. Whereas remember helps you retain state only across recompositions
     val searchQueryState = rememberSaveable {
         mutableStateOf("")
     }

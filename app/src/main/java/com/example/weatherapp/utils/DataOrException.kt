@@ -1,5 +1,8 @@
 package com.example.weatherapp.utils
 
+/*
+    class to handle response
+ */
 class DataOrException<T, Boolean, E: Exception>(
     var data: T? = null,
     var loading: Boolean? = null,
