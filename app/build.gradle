@@ -97,6 +97,13 @@ dependencies {
     //Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
+    //Strikt - can be used with any test runner, here we use it along Junit
+    testImplementation("io.strikt:strikt-core:0.34.0")
+
+    //Compose navigation testing
+    androidTestImplementation "androidx.navigation:navigation-testing:2.5.3"
+
+
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
