@@ -8,6 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -36,34 +37,53 @@ fun WeatherMainScreen(
     Log.d("TAG", "Coordinates: ${locationCoordinates?.latitude + ", " + locationCoordinates?.longitude}")
     val weatherData = produceState<DataOrException<Weather, Boolean, Exception>>(
         initialValue = DataOrException(loading = true)) {
-        val (latitude, longitude) = locationCoordinates!!
-        value = if(city?.trim().isNullOrEmpty()) {
+
+        value = if (city?.trim().isNullOrEmpty() && locationCoordinates != null) {
+            val (latitude, longitude) = locationCoordinates!!
             mainViewModel.getWeatherByCoordinates(latitude, longitude)
-        }
-        else mainViewModel.getWeatherByCity(city = city)
+        } else mainViewModel.getWeatherByCity(city = city)
     }.value
 
-    if(weatherData.loading == true) {
+    if (weatherData.loading == true) {
         CircularProgressIndicator()
-    } else if(weatherData.data != null) {
+    } else if (weatherData.data != null) {
         MainScaffold(weather = weatherData.data!!, navController = navController)
+    } else {
+        ErrorMessage()
     }
+}
+
+@Composable
+fun ErrorMessage() {
+    Column(
+        Modifier
+            .padding(4.dp)
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Failed to load the data, could be any of the reasons below:")
+        Text(text = "1. GPS unavailable, please check permissions and enable to access full features")
+        Text(text = "2. Incorrect search value entered, please enter the suggested format")
+    }
+
 }
 
 @Composable
 fun MainScaffold(weather: Weather, navController: NavHostController) {
 
     Scaffold(topBar = {
-        WeatherAppBar(title = weather.name +", "+ weather.sys.country,
+        WeatherAppBar(title = weather.name + ", " + weather.sys.country,
             navController = navController,
             onAddAction = {
-                          navController.navigate(WeatherScreens.SearchScreen.name)
+                navController.navigate(WeatherScreens.SearchScreen.name)
             },
-            elevation = 5.dp){
+            elevation = 5.dp) {
             Log.d("TAG", "MainScaffold: Button clicked")
         }
     }) {
         MainContent(data = weather)
+
     }
 }
 
@@ -83,13 +103,13 @@ fun MainContent(data: Weather) {
             style = MaterialTheme.typography.caption,
             color = MaterialTheme.colors.onSecondary,
             fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.padding(6.dp))
+            modifier = Modifier.padding(10.dp))
 
         Surface(modifier = Modifier
             .padding(4.dp)
-            .size(200.dp),
-                shape = CircleShape,
-                color = Color(0xFFFFC400)) {
+            .size(300.dp),
+            shape = RectangleShape,
+            color = Color(0xFFC4A7CC)) {
 
             Column(verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally) {
@@ -104,5 +124,11 @@ fun MainContent(data: Weather) {
         HumidityWindPressureRow(weather = data, isImperial = true)
         Divider()
         SunsetSunRiseRow(weather = data)
+        /*Button(onClick = { *//*TODO*//* },
+            modifier = Modifier.padding(5.dp)
+                .fillMaxHeight(5f)
+                .fillMaxWidth(10f)) {
+
+        }*/
     }
 }

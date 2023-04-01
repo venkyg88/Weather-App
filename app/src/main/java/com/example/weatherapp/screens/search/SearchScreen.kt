@@ -46,8 +46,16 @@ fun SearchScreen(navController: NavController) {
                     .padding(16.dp)
                     .align(Alignment.CenterHorizontally)) { city ->
                     Log.d("TAG", "SearchScreen: $it")
-                    navController.navigate(WeatherScreens.MainScreen.name+"/$city")
+                    navController.navigate(WeatherScreens.MainScreen.name + "/$city")
                 }
+                Column(verticalArrangement = Arrangement.Bottom,
+                    horizontalAlignment = Alignment.Start) {
+                    Text(text = "Search api only supports below formats")
+                    Text(text = "1.) City")
+                    Text(text = "2.) City, CountyCode")
+                    Text(text = "3.) City, StateCode, CountyCode")
+                }
+
             }
         }
     }

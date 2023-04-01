@@ -28,8 +28,8 @@ import com.example.weatherapp.R
 @Composable
 fun WeatherStateImage(imageUrl: String) {
     Image(painter = rememberImagePainter(imageUrl),
-        contentDescription = "icon image" ,
-        modifier = Modifier.size(80.dp))
+        contentDescription = "icon image",
+        modifier = Modifier.size(180.dp))
 }
 
 @Composable
@@ -89,7 +89,7 @@ fun SunsetSunRiseRow(weather: Weather) {
         Row {
             Image(painter = painterResource(id = R.drawable.sunrise),
                 contentDescription = "sunrise",
-                modifier = Modifier.size(30.dp))
+                modifier = Modifier.size(50.dp))
             Text(text = formatDateTime(weather.sys.sunrise),
                 style = MaterialTheme.typography.caption)
 
@@ -101,7 +101,7 @@ fun SunsetSunRiseRow(weather: Weather) {
                 style = MaterialTheme.typography.caption)
             Image(painter = painterResource(id = R.drawable.sunset),
                 contentDescription = "sunset",
-                modifier = Modifier.size(30.dp))
+                modifier = Modifier.size(50.dp))
 
 
         }
@@ -120,10 +120,10 @@ fun HumidityWindPressureRow(weather: Weather,
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Row(modifier = Modifier.padding(4.dp)) {
+        Row(modifier = Modifier.padding(10.dp)) {
             Icon(painter = painterResource(id = R.drawable.humidity),
                 contentDescription = "humidity icon",
-                modifier = Modifier.size(20.dp))
+                modifier = Modifier.size(40.dp))
             Text(text = "${weather.main.humidity}%",
                 style = MaterialTheme.typography.caption)
 
@@ -132,7 +132,7 @@ fun HumidityWindPressureRow(weather: Weather,
         Row() {
             Icon(painter = painterResource(id = R.drawable.pressure),
                 contentDescription = "pressure icon",
-                modifier = Modifier.size(20.dp))
+                modifier = Modifier.size(40.dp))
             Text(text = "${weather.main.pressure} psi",
                 style = MaterialTheme.typography.caption)
 
@@ -141,7 +141,7 @@ fun HumidityWindPressureRow(weather: Weather,
         Row() {
             Icon(painter = painterResource(id = R.drawable.wind),
                 contentDescription = "wind icon",
-                modifier = Modifier.size(20.dp))
+                modifier = Modifier.size(40.dp))
             Text(text = "${formatDecimals(weather.wind.speed)} " + if (isImperial) "mph" else "m/s",
                 style = MaterialTheme.typography.caption)
 
