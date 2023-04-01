@@ -2,11 +2,9 @@ package com.example.weatherapp
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
-import com.example.weatherapp.repository.WeatherRepository
+import com.example.weatherapp.data.repository.WeatherRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlin.reflect.KProperty
 
 @HiltViewModel
 class ApplicationViewModel @Inject constructor(application: Application,

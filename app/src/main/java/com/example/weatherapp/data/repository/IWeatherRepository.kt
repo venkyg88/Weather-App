@@ -1,6 +1,6 @@
-package com.example.weatherapp.repository
+package com.example.weatherapp.data.repository
 
-import com.example.weatherapp.data.DataOrException
+import com.example.weatherapp.utils.DataOrException
 import com.example.weatherapp.model.Weather
 
 interface IWeatherRepository {

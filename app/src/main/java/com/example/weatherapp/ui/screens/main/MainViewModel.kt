@@ -1,9 +1,9 @@
-package com.example.weatherapp.screens.main
+package com.example.weatherapp.ui.screens.main
 
 import androidx.lifecycle.ViewModel
-import com.example.weatherapp.data.DataOrException
+import com.example.weatherapp.utils.DataOrException
 import com.example.weatherapp.model.Weather
-import com.example.weatherapp.repository.IWeatherRepository
+import com.example.weatherapp.data.repository.IWeatherRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlin.Exception
