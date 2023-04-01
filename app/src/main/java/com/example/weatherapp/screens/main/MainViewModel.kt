@@ -3,13 +3,13 @@ package com.example.weatherapp.screens.main
 import androidx.lifecycle.ViewModel
 import com.example.weatherapp.data.DataOrException
 import com.example.weatherapp.model.Weather
-import com.example.weatherapp.repository.WeatherRepository
+import com.example.weatherapp.repository.IWeatherRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlin.Exception
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repository: WeatherRepository) :
+class MainViewModel @Inject constructor(private val repository: IWeatherRepository) :
     ViewModel() {
 
     suspend fun getWeatherByCity(city: String?): DataOrException<Weather, Boolean, Exception> {
