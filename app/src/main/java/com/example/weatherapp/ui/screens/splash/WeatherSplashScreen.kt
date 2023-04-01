@@ -1,4 +1,4 @@
-package com.example.weatherapp.screens
+package com.example.weatherapp.ui.screens
 
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
@@ -25,7 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.weatherapp.R
-import com.example.weatherapp.navigation.WeatherScreens
+import com.example.weatherapp.ui.navigation.WeatherScreens
 import kotlinx.coroutines.delay
 
 @Composable

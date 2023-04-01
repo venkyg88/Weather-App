@@ -1,4 +1,4 @@
-package com.example.weatherapp.navigation
+package com.example.weatherapp.ui.navigation
 
 enum class WeatherScreens {
 

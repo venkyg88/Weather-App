@@ -1,9 +1,9 @@
-package com.example.weatherapp.repository
+package com.example.weatherapp.data.repository
 
 import android.util.Log
-import com.example.weatherapp.data.DataOrException
+import com.example.weatherapp.utils.DataOrException
 import com.example.weatherapp.model.Weather
-import com.example.weatherapp.network.WeatherApi
+import com.example.weatherapp.data.network.WeatherApi
 import javax.inject.Inject
 
 class WeatherRepository @Inject constructor(private val api: WeatherApi) : IWeatherRepository {

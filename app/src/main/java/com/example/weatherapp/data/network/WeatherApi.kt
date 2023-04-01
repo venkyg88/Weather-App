@@ -1,4 +1,4 @@
-package com.example.weatherapp.network
+package com.example.weatherapp.data.network
 
 import com.example.weatherapp.model.Weather
 import com.example.weatherapp.utils.API_KEY

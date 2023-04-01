@@ -1,8 +1,7 @@
-package com.example.weatherapp.screens
+package com.example.weatherapp.ui.screens
 
 import android.util.Log
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -14,14 +13,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.weatherapp.data.DataOrException
+import com.example.weatherapp.utils.DataOrException
 import com.example.weatherapp.model.LocationCoordinates
 import com.example.weatherapp.model.Weather
-import com.example.weatherapp.navigation.WeatherScreens
-import com.example.weatherapp.screens.main.MainViewModel
-import com.example.weatherapp.uicomponents.HumidityWindPressureRow
-import com.example.weatherapp.uicomponents.SunsetSunRiseRow
-import com.example.weatherapp.uicomponents.WeatherStateImage
+import com.example.weatherapp.ui.navigation.WeatherScreens
+import com.example.weatherapp.ui.screens.main.MainViewModel
+import com.example.weatherapp.ui.uicomponents.HumidityWindPressureRow
+import com.example.weatherapp.ui.uicomponents.SunsetSunRiseRow
+import com.example.weatherapp.ui.uicomponents.WeatherStateImage
 import com.example.weatherapp.utils.formatDate
 import com.example.weatherapp.utils.formatDecimals
 import com.example.weatherapp.widgets.WeatherAppBar
@@ -33,8 +32,7 @@ fun WeatherMainScreen(
     locationCoordinates: LocationCoordinates?,
     city: String?
 ) {
-    Log.d("TAG", "WeatherMainScreen: ${city}")
-    Log.d("TAG", "Coordinates: ${locationCoordinates?.latitude + ", " + locationCoordinates?.longitude}")
+
     val weatherData = produceState<DataOrException<Weather, Boolean, Exception>>(
         initialValue = DataOrException(loading = true)) {
 

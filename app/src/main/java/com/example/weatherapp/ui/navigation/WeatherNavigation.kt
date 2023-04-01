@@ -1,4 +1,4 @@
-package com.example.weatherapp.navigation
+package com.example.weatherapp.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -8,10 +8,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.weatherapp.model.LocationCoordinates
-import com.example.weatherapp.screens.WeatherMainScreen
-import com.example.weatherapp.screens.WeatherSplashScreen
-import com.example.weatherapp.screens.main.MainViewModel
-import com.example.weatherapp.screens.search.SearchScreen
+import com.example.weatherapp.ui.screens.WeatherMainScreen
+import com.example.weatherapp.ui.screens.WeatherSplashScreen
+import com.example.weatherapp.ui.screens.main.MainViewModel
+import com.example.weatherapp.ui.screens.search.SearchScreen
 
 @Composable
 fun WeatherNavigation(locationCoordinates: LocationCoordinates?) {
