@@ -31,6 +31,10 @@ import com.example.weatherapp.widgets.WeatherAppBar
 @Composable
 fun SearchScreen(navController: NavController) {
     Scaffold(topBar = {
+        /*
+            WeatherAppBar is a re-usable component available in uicomponents folder. After each search
+            we are navigated back to main screen with the response based on the input searched
+         */
         WeatherAppBar(title = "Search",
             navController = navController,
             icon = Icons.Default.ArrowBack,
@@ -45,7 +49,6 @@ fun SearchScreen(navController: NavController) {
                     .fillMaxWidth()
                     .padding(16.dp)
                     .align(Alignment.CenterHorizontally)) { city ->
-                    Log.d("TAG", "SearchScreen: $it")
                     navController.navigate(WeatherScreens.MainScreen.name + "/$city")
                 }
                 Column(verticalArrangement = Arrangement.Bottom,
@@ -55,7 +58,6 @@ fun SearchScreen(navController: NavController) {
                     Text(text = "2.) City, CountyCode")
                     Text(text = "3.) City, StateCode, CountyCode")
                 }
-
             }
         }
     }

@@ -34,6 +34,14 @@ fun WeatherSplashScreen(navController: NavController) {
         Animatable(0f)
     }
 
+    /*
+        LaunchEffect is one of the side-effects of the Composable functions
+        To call suspend functions safely from inside a composable, use the LaunchedEffect composable.
+        When LaunchedEffect enters the Composition, it launches a coroutine with the block of code passed as a parameter.
+        The coroutine will be cancelled if LaunchedEffect leaves the composition.
+        If LaunchedEffect is recomposed with different keys (see the Restarting Effects section below),
+        the existing coroutine will be cancelled and the new suspend function will be launched in a new coroutine.
+     */
     LaunchedEffect(key1 = true, block = {
         scale.animateTo(targetValue = 0.9f,
             animationSpec = tween(
@@ -44,17 +52,19 @@ fun WeatherSplashScreen(navController: NavController) {
                 }))
 
         delay(2000L)
+        // we keep the default city blank so that we make a call based on coordinates if know in the WeatherMainScreen
         val defaultCity = " "
         navController.navigate(WeatherScreens.MainScreen.name+"/$defaultCity")
     } )
 
+    //Splash screen canvas with image and text
     Surface(
         modifier = Modifier
             .padding(15.dp)
             .size(330.dp)
             .scale(scale.value),
         shape = CircleShape,
-        color = Color.White,
+        color = Color.Gray,
         border = BorderStroke(
             width = 2.dp, color = Color.LightGray
         )
@@ -66,7 +76,7 @@ fun WeatherSplashScreen(navController: NavController) {
                 contentDescription = "sunny icon",
                 contentScale = ContentScale.Fit,
                 modifier = Modifier.size(95.dp))
-            Text(text = "Find the Sun?",
+            Text(text = "Weather Tracker",
                 style = MaterialTheme.typography.h5,
                 color = Color.LightGray)
         }

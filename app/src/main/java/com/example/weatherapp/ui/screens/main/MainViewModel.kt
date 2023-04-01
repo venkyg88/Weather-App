@@ -12,10 +12,17 @@ import kotlin.Exception
 class MainViewModel @Inject constructor(private val repository: IWeatherRepository) :
     ViewModel() {
 
+    /*
+        suspendable function that takes the searched value and calls repository for a response
+     */
     suspend fun getWeatherByCity(city: String?): DataOrException<Weather, Boolean, Exception> {
         return repository.getWeather(city = city)
     }
 
+    /*
+        suspendable function called when the location coordinates are know which in turn passes
+        the them to repository for a response
+     */
     suspend fun getWeatherByCoordinates(
         latitude: String,
         longitude: String,
