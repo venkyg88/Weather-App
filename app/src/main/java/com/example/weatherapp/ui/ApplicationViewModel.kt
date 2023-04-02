@@ -1,4 +1,4 @@
-package com.example.weatherapp
+package com.example.weatherapp.ui
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -11,6 +11,8 @@ class ApplicationViewModel @Inject constructor(application: Application,
                         private val repository: WeatherRepository): AndroidViewModel(application){
 
     private val locationLiveData = LocationLiveData(application)
+
+    // getter since locationLiveData is private
     fun getLocationLiveData() = locationLiveData
     fun startLocationUpdates() {
         locationLiveData.startLocationUpdates()
