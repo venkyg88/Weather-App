@@ -1,4 +1,4 @@
-package com.example.weatherapp.ui
+package com.example.weatherapp
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import com.example.weatherapp.model.LocationCoordinates
+import com.example.weatherapp.ui.ApplicationViewModel
 import com.example.weatherapp.ui.navigation.WeatherNavigation
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 import dagger.hilt.android.AndroidEntryPoint
